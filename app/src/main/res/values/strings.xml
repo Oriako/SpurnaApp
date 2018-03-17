@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SpurnaApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_status">Status</string>
+    <string name="button_feed">Feed</string>
+    <string name="button_add">Add</string>
+</resources>
