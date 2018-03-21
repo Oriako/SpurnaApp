@@ -6,13 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 /**
  * Created by Oriako on 05/03/2018.
  */
 
-public class StatusFragment extends Fragment {
+public class StatusFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
@@ -24,10 +25,19 @@ public class StatusFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        ProgressBar progressBar = view.findViewById(R.id.vertical_progressbar);
+        Button feedButton = view.findViewById(R.id.button);
+        feedButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        ProgressBar progressBar = this.getView().findViewById(R.id.vertical_progressbar);
         if (progressBar != null)
         {
-            progressBar.setProgress(50);
+            Integer progress = progressBar.getProgress() + 40;
+            if (progress >= 100)
+                progress -= 100;
+            progressBar.setProgress(progress);
         }
     }
 }

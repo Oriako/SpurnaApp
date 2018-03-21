@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton0"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="@string/button_add" />
+
+            <EditText
+                android:id="@+id/timeText0"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/qtyText0"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="qty"
+                android:ems="10"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/deleteButton0"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="X" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton1"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="@string/button_add" />
+
+            <EditText
+                android:id="@+id/timeText1"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/qtyText1"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="qty"
+                android:ems="10"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/deleteButton1"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="X" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton2"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="@string/button_add" />
+
+            <EditText
+                android:id="@+id/timeText2"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/qtyText2"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="qty"
+                android:ems="10"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/deleteButton2"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="X" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton3"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="@string/button_add" />
+
+            <EditText
+                android:id="@+id/timeText3"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/qtyText3"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="qty"
+                android:ems="10"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/deleteButton3"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="X" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="fill"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/addButton4"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="@string/button_add" />
+
+            <EditText
+                android:id="@+id/timeText4"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="time"
+                android:ems="10"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/qtyText4"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:hint="qty"
+                android:ems="10"
+                android:inputType="time" />
+
+            <Button
+                android:id="@+id/deleteButton4"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="X" />
+
+
+        </LinearLayout>
+
+</LinearLayout>
