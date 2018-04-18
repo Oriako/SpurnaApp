@@ -1,9 +1,16 @@
 package com.spurna.core.util;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -93,5 +100,25 @@ public class Utils {
             return new String("Exception: " + e.getMessage());
         }
 
+    }
+
+    public static boolean setImageFromAssets(String imageName, ImageView mImage)
+    {
+        if (mImage == null)
+            return false;
+
+        try {
+            // get input stream
+            InputStream ims = mImage.getResources().getAssets().open(imageName);
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+            mImage.setImageDrawable(d);
+        }
+        catch(IOException ex) {
+            return false;
+        }
+
+        return true;
     }
 }
