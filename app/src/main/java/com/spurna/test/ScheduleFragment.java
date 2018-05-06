@@ -15,10 +15,7 @@ import com.spurna.core.business.ScheduledTimeBO;
 import com.spurna.core.model.ScheduledTime;
 import com.spurna.core.util.SetTime;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,9 +58,10 @@ public class ScheduleFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.schedule_fragment_new, container, false);
+        return inflater.inflate(R.layout.schedule_fragment, container, false);
     }
-
+    //ToDo: Fix THAT
+    /*
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
@@ -169,5 +167,5 @@ public class ScheduleFragment extends Fragment{
         }
 
         CoreController.getInstance().updateCache(SCHEDULE_CACHE_KEY, scheduleList);
-    }
+    }*/
 }

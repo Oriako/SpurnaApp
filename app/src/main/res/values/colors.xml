@@ -5,7 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorSpurnaOrange">#e5b463</color>
     <color name="colorButtonHover">#f4d29b</color>
-    <color name="colorGrey">#202020</color>
+    <color name="colorGrey">#c2c0cf</color>
+    <color name="colorGreyInput">#cbcfd2</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorProgressBar">#d08d0c</color>
 
 </resources>

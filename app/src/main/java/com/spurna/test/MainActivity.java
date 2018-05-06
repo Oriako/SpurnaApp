@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Select first menu item by default and show Fragment accordingly.
             Menu menu = bottomNavigationView.getMenu();
-            selectFragment(menu.getItem(0));
+            selectFragment(menu.getItem(1));
 
             // Set action to perform when any menu-item is selected.
             bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 if (configButton != null)
                     configButton.setVisibility(View.VISIBLE);
                 mTextMessage.setText(R.string.title_home);
-                mTextMessage.setVisibility(View.INVISIBLE);
+                //mTextMessage.setVisibility(View.INVISIBLE);
                 pushFragment(new HomeFragment());
                 break;
 

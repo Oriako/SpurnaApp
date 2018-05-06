@@ -25,7 +25,7 @@ public class StatusFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        Button feedButton = view.findViewById(R.id.button);
+        Button feedButton = view.findViewById(R.id.buttonFill);
         feedButton.setOnClickListener(this);
     }
 

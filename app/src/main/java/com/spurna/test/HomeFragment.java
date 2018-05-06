@@ -30,10 +30,10 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.spurna_fragment, container, false);
     }
 
-    public void onViewCreated(View view, Bundle savedInstanceState)
+    /*public void onViewCreated(View view, Bundle savedInstanceState)
     {
         ImageView mImage = view.findViewById(R.id.imageView);
         Utils.setImageFromAssets("spurna.png", mImage);
-    }
+    }*/
 
 }

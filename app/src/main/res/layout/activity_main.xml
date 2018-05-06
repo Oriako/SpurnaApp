@@ -17,15 +17,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
          />
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="63dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:background="@mipmap/gear"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -37,51 +29,6 @@
         android:textColor="@color/colorBlack"
         android:text="@string/title_home"/>
 
-    <TextView
-        android:id="@+id/byteManagerText"
-        android:layout_width="279dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/app_title"
-        android:textSize="40sp"
-        android:fontFamily="@font/eccentricstd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/buttonLink"
-        android:layout_width="124dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="200dp"
-        android:layout_marginTop="108dp"
-        android:background="@mipmap/link_device"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/buttonCheck"
-        android:layout_width="124dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="108dp"
-        android:background="@mipmap/check_status"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/buttonSchedule"
-        android:layout_width="280dp"
-        android:layout_height="168dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="256dp"
-        android:visibility="visible"
-        android:background="@mipmap/schedule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <FrameLayout
         android:id="@+id/rootLayout"
