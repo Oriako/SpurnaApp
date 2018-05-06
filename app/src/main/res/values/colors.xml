@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorSpurnaOrange">#e5b463</color>
+    <color name="colorButtonHover">#f4d29b</color>
+    <color name="colorGrey">#202020</color>
+    <color name="colorBlack">#000000</color>
+
 </resources>

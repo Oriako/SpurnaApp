@@ -5,4 +5,6 @@
     <string name="title_status">Status</string>
     <string name="button_feed">Feed</string>
     <string name="button_add">Add</string>
+    <string name="app_title">BYTE MANAGER</string>
+
 </resources>
