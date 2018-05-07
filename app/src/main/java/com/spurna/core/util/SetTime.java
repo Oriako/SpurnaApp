@@ -39,7 +39,7 @@ public class SetTime implements View.OnFocusChangeListener, TimePickerDialog.OnT
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // TODO Auto-generated method stub
-        this.editText.setText( hourOfDay + ":" + minute);
+        this.editText.setText( String.format("%02d:%02d", hourOfDay, minute));
     }
 
 }

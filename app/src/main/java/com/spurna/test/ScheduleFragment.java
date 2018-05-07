@@ -60,8 +60,7 @@ public class ScheduleFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.schedule_fragment, container, false);
     }
-    //ToDo: Fix THAT
-    /*
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
@@ -69,68 +68,68 @@ public class ScheduleFragment extends Fragment{
 
         for (int i = 0; i < MAX_BUTTONS; i++)
         {
-            final int index = i;
-
-            int timeTextId = getResources().getIdentifier(timeField + String.valueOf(index), "id", "com.spurna.test");
-            EditText timeText = (EditText) view.findViewById(timeTextId);
-            SetTime fromTime = new SetTime(timeText, timeText.getContext());
-
-
-            int addButtonId = getResources().getIdentifier(addButtonField + String.valueOf(i), "id", "com.spurna.test");
-            Button addButton = (Button) view.findViewById(addButtonId);
-
-            addButton.setOnClickListener(new View.OnClickListener()
+            try
             {
-                @Override
-                public void onClick(View view)
-                {
-                    int timeTextId = getResources().getIdentifier(timeField + String.valueOf(index), "id", "com.spurna.test");
-                    int qtyTextId = getResources().getIdentifier(qtyField + String.valueOf(index), "id", "com.spurna.test");
+                final int index = i;
 
-                    EditText timeText = (EditText) parentView.findViewById(timeTextId);
-                    EditText qtyText = (EditText) parentView.findViewById(qtyTextId);
+                int timeTextId = getResources().getIdentifier(timeField + String.valueOf(index), "id", "com.spurna.test");
+                EditText timeText = (EditText) view.findViewById(timeTextId);
+                SetTime fromTime = new SetTime(timeText, timeText.getContext());
 
-                    Editable timeStr = timeText.getText();
-                    Editable qtyStr = qtyText.getText();
 
-                    try {
-                        String[] time = timeStr.toString().split ( ":" );
-                        int hour = Integer.parseInt ( time[0].trim() );
-                        int min = Integer.parseInt ( time[1].trim() );
+                int addButtonId = getResources().getIdentifier(addButtonField + String.valueOf(i), "id", "com.spurna.test");
+                Button addButton = (Button) view.findViewById(addButtonId);
 
-                        Integer qty = Integer.parseInt(qtyStr.toString());
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int timeTextId = getResources().getIdentifier(timeField + String.valueOf(index), "id", "com.spurna.test");
+                        int qtyTextId = getResources().getIdentifier(qtyField + String.valueOf(index), "id", "com.spurna.test");
 
-                        if (time != null && qty != null)
-                        {
-                            ScheduledTime sdTime = timedArray[index];
-                            if (sdTime == null)
-                                sdTime = CoreController.getBO(ScheduledTimeBO.class).getNew();
+                        EditText timeText = (EditText) parentView.findViewById(timeTextId);
+                        EditText qtyText = (EditText) parentView.findViewById(qtyTextId);
 
-                            sdTime.setQty(qty);
-                            sdTime.setTimeInSec((int) hour*60*60 + min*60);
-                            timedArray[index] = sdTime;
+                        Editable timeStr = timeText.getText();
+                        Editable qtyStr = qtyText.getText();
+
+                        try {
+                            String[] time = timeStr.toString().split(":");
+                            int hour = Integer.parseInt(time[0].trim());
+                            int min = Integer.parseInt(time[1].trim());
+
+                            Integer qty = Integer.parseInt(qtyStr.toString());
+
+                            if (time != null && qty != null) {
+                                ScheduledTime sdTime = timedArray[index];
+                                if (sdTime == null)
+                                    sdTime = CoreController.getBO(ScheduledTimeBO.class).getNew();
+
+                                sdTime.setQty(qty);
+                                sdTime.setTimeInSec((int) hour * 60 * 60 + min * 60);
+                                timedArray[index] = sdTime;
+                            }
+                        } catch (Throwable e) {
+
                         }
+
+                        updateView(parentView);
                     }
-                    catch (Throwable e)
-                    {
+                });
 
+                int deleteButtonId = getResources().getIdentifier(deleteButtonField + String.valueOf(i), "id", "com.spurna.test");
+                Button deleteButton = (Button) view.findViewById(deleteButtonId);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        timedArray[index] = null;
+                        updateView(parentView);
                     }
-
-                    updateView(parentView);
-                }
-            });
-
-            int deleteButtonId = getResources().getIdentifier(deleteButtonField + String.valueOf(i), "id", "com.spurna.test");
-            Button deleteButton = (Button) view.findViewById(deleteButtonId);
-            deleteButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    timedArray[index] = null;
-                    updateView(parentView);
+                });
             }
-            });
+            catch (Throwable e)
+            {
+                break;
+            }
         }
 
         updateView(view);
@@ -144,28 +143,33 @@ public class ScheduleFragment extends Fragment{
         {
             int timeTextId = getResources().getIdentifier(timeField + String.valueOf(i), "id", "com.spurna.test");
             int qtyTextId = getResources().getIdentifier(qtyField + String.valueOf(i), "id", "com.spurna.test");
-            EditText timeText = view.findViewById(timeTextId);
-            EditText qtyText = view.findViewById(qtyTextId);
 
-            ScheduledTime time = timedArray[i];
-            if (time != null)
+            try
             {
-                int totalSecs = time.getTimeInSec();
-                int hours = totalSecs / 3600;
-                int minutes = (totalSecs % 3600) / 60;
+                EditText timeText = view.findViewById(timeTextId);
+                EditText qtyText = view.findViewById(qtyTextId);
 
-                timeText.setText(String.format("%02d:%02d", hours, minutes));
-                qtyText.setText(time.getQty().toString());
+                ScheduledTime time = timedArray[i];
+                if (time != null) {
+                    int totalSecs = time.getTimeInSec();
+                    int hours = totalSecs / 3600;
+                    int minutes = (totalSecs % 3600) / 60;
 
-                scheduleList.add(time);
+                    timeText.setText(String.format("%02d:%02d", hours, minutes));
+                    qtyText.setText(time.getQty().toString());
+
+                    scheduleList.add(time);
+                } else {
+                    timeText.setText(null);
+                    qtyText.setText(null);
+                }
             }
-            else
+            catch (Throwable e)
             {
-                timeText.setText(null);
-                qtyText.setText(null);
+                break;
             }
         }
 
         CoreController.getInstance().updateCache(SCHEDULE_CACHE_KEY, scheduleList);
-    }*/
+    }
 }
