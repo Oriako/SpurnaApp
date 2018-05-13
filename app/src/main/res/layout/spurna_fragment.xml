@@ -25,7 +25,6 @@
         android:layout_height="99dp"
         android:layout_marginEnd="200dp"
         android:layout_marginTop="108dp"
-        android:background="@mipmap/link_device"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
@@ -36,7 +35,6 @@
         android:layout_height="99dp"
         android:layout_marginEnd="48dp"
         android:layout_marginTop="108dp"
-        android:background="@mipmap/check_status"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
@@ -47,7 +45,6 @@
         android:layout_height="168dp"
         android:layout_marginEnd="44dp"
         android:layout_marginTop="256dp"
-        android:background="@mipmap/schedule"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />

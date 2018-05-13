@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.spurna.test.R;
@@ -120,6 +121,24 @@ public class Utils {
             Drawable d = Drawable.createFromStream(ims, null);
             // set image to ImageView
             mImage.setImageDrawable(d);
+        }
+        catch(IOException ex) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean setButtonBackgroundFromAssets(String imageName, Button button)
+    {
+        ImageView mImage = new ImageView(button.getContext());
+        try {
+            // get input stream
+            InputStream ims = mImage.getResources().getAssets().open(imageName);
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+            button.setBackground(d);
         }
         catch(IOException ex) {
             return false;

@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         linkDeviceButton = view.findViewById(R.id.buttonLink);
+        Utils.setButtonBackgroundFromAssets("link_device.png", linkDeviceButton);
         linkDeviceButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -49,6 +50,7 @@ public class HomeFragment extends Fragment {
         });
 
         statusButton = view.findViewById(R.id.buttonCheck);
+        Utils.setButtonBackgroundFromAssets("check_status.png", statusButton);
         statusButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
         });
 
         scheduleButton = view.findViewById(R.id.buttonSchedule);
+        Utils.setButtonBackgroundFromAssets("schedule.png", scheduleButton);
         scheduleButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
