@@ -1,9 +1,15 @@
 package com.spurna.core.util;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+
+import com.spurna.test.R;
 
 import org.json.JSONObject;
 
@@ -120,5 +126,19 @@ public class Utils {
         }
 
         return true;
+    }
+
+    public static void pushFragment(Activity activity, Integer layoutId, Fragment fragment) {
+        if (fragment == null)
+            return;
+
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        if (fragmentManager != null) {
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            if (ft != null) {
+                ft.replace(layoutId, fragment);
+                ft.commit();
+            }
+        }
     }
 }

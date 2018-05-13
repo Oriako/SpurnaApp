@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"
-            android:label="SpurnaApp" />
+            android:label="SpurnaApp"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
