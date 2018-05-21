@@ -8,7 +8,7 @@ import android.webkit.CookieManager;
 
 public class EnvironmentHelper {
 
-    public static String SERVER_URL = "https://spurna.raindrinker.com";
+    public static String SERVER_URL = "https://spurna.raindrinker.com/";
     public static String PATH_FILE = "";
 
     private String productId;

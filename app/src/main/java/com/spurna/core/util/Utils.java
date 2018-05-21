@@ -58,20 +58,43 @@ public class Utils {
         return content;
     }
 
+    public static String getURLGet(String method, Map<String,String> getParams)
+    {
+        String result = "";
+
+        String baseURL = EnvironmentHelper.SERVER_URL;
+        result += baseURL;
+        if (method != null && !method.isEmpty())
+            result += method + File.separator;
+
+        if (getParams != null && !getParams.isEmpty())
+        {
+            String paramStr = "?";
+            for (Map.Entry<String,String> entry : getParams.entrySet())
+            {
+                paramStr += entry.getKey() + "=" + entry.getValue() + "&";
+            }
+
+            paramStr = paramStr.substring(0, paramStr.length()-1);
+            result += paramStr;
+        }
+
+        return result;
+    }
+
     public static String sendGet(String method, Map<String,String> getParams)
     {
         String content = "";
         try {
-            URL url = new URL("https://spurna.raindrinker.com/users");
+            String urlStr = getURLGet(method,getParams);
+            URL url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
+            //connection.setDoOutput(true);
             connection.setDoInput(true);
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            //connection.setConnectTimeout(5000);
+            //connection.setReadTimeout(5000);
             connection.connect();
-            String contentType = connection.getContentType();
-            String mesg = connection.getResponseMessage();
             int code = connection.getResponseCode();
             BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
