@@ -3,17 +3,31 @@ package com.spurna.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.spurna.core.util.EnvironmentHelper;
 import com.spurna.core.util.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import android.webkit.CookieManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 /**
  * Created by Oriako on 13/05/2018.
@@ -51,6 +65,31 @@ public class SplashScreenActivity extends Activity {
         // Simulate a long loading process on application startup.
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
+
+        String productId = null;
+        try
+        {
+            String jsonToString = Utils.doReadConfig(getApplicationContext());
+            JSONObject object = new JSONObject(jsonToString);
+            productId = object.getString("productId");
+        }
+        catch (Throwable e)
+        {
+
+        }
+
+        if (productId == null)
+        {
+            productId = UUID.randomUUID().toString();
+            JSONObject object = new JSONObject();
+            try {
+                object.put("productId", productId);
+                Utils.doCreateConfig(getApplicationContext(), object.toString());
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
+        EnvironmentHelper.getInstance().setProductId(productId);
     }
 
 

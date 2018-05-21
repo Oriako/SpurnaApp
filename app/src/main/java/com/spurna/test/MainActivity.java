@@ -1,6 +1,7 @@
 package com.spurna.test;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
+import com.spurna.core.util.EnvironmentHelper;
 import com.spurna.core.util.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         setupNavigationView();
         configButton = (Button) findViewById(R.id.configButton);

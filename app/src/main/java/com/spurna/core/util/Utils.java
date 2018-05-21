@@ -5,26 +5,21 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.spurna.test.R;
-
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -34,79 +29,61 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Utils {
 
-    public static String getPostDataString(JSONObject params) throws Exception
+    public static String sendGet2(String method, Map<String,String> getParams)
     {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
 
-        Iterator<String> itr = params.keys();
-
-        while(itr.hasNext()){
-
-            String key= itr.next();
-            Object value = params.get(key);
-
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(URLEncoder.encode(key, "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-        }
-        return result.toString();
-    }
-
-    public static String sendPost(JSONObject object)
-    {
-        try
-        {
-            URL url = new URL(EnvironmentHelper.SERVER_URL);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(15000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getPostDataString(object));
-
-            writer.flush();
-            writer.close();
-            os.close();
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode == HttpsURLConnection.HTTP_OK)
-            {
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuffer sb = new StringBuffer("");
-                String line="";
-
-                while((line = in.readLine()) != null)
-                {
-                    sb.append(line);
-                    break;
-                }
-
-                in.close();
-                return sb.toString();
+        String content = "";
+        try {
+            URL url = new URL(EnvironmentHelper.SERVER_URL + File.separator + "products");
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            connection.connect();
+            String contentType = connection.getContentType();
+            String mesg = connection.getResponseMessage();
+            Object cont = connection.getContent();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                content += line + "\n";
             }
-            else
-            {
-                return new String("false : " + responseCode);
-            }
-
         }
         catch (Throwable e)
         {
-            return new String("Exception: " + e.getMessage());
+            e.printStackTrace();
         }
+        return content;
+    }
 
+    public static String sendGet(String method, Map<String,String> getParams)
+    {
+        String content = "";
+        try {
+            URL url = new URL("https://spurna.raindrinker.com/users");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            connection.connect();
+            String contentType = connection.getContentType();
+            String mesg = connection.getResponseMessage();
+            int code = connection.getResponseCode();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                content += line + "\n";
+            }
+        }
+        catch (Throwable e)
+        {
+            e.printStackTrace();
+        }
+        return content;
     }
 
     public static boolean setImageFromAssets(String imageName, ImageView mImage)
@@ -159,5 +136,37 @@ public class Utils {
                 ft.commit();
             }
         }
+    }
+
+    public static void doCreateConfig(Context context, String configStr) throws IOException
+    {
+        File path = context.getFilesDir();
+        File file = new File(path, "config.txt");
+
+        FileOutputStream stream = new FileOutputStream(file);
+        try {
+            stream.write(configStr.getBytes());
+        } finally {
+            stream.close();
+        }
+    }
+
+    public static String doReadConfig(Context context) throws IOException
+    {
+        File path = context.getFilesDir();
+        File file = new File(path, "config.txt");
+        int length = (int) file.length();
+
+        byte[] bytes = new byte[length];
+
+        FileInputStream in = new FileInputStream(file);
+        try {
+            in.read(bytes);
+        } finally {
+            in.close();
+        }
+
+        String contents = new String(bytes);
+        return contents;
     }
 }

@@ -13,10 +13,16 @@ import android.widget.EditText;
 import com.spurna.core.CoreController;
 import com.spurna.core.business.ScheduledTimeBO;
 import com.spurna.core.model.ScheduledTime;
+import com.spurna.core.util.EnvironmentHelper;
 import com.spurna.core.util.SetTime;
+import com.spurna.core.util.Utils;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Oriako on 05/03/2018.
@@ -24,7 +30,6 @@ import java.util.List;
 
 public class ScheduleFragment extends Fragment{
 
-    public static final String SCHEDULE_CACHE_KEY = "CACHED_VALUE:SCHEDULE_CACHE_KEY";
     public static final Integer MAX_BUTTONS = 5;
 
     private final String timeField = "timeText";
@@ -33,6 +38,7 @@ public class ScheduleFragment extends Fragment{
     private final String deleteButtonField = "deleteButton";
 
     private ScheduledTime [] timedArray = new ScheduledTime[MAX_BUTTONS];
+    private List<ScheduledTime> scheduleList;
 
     @Nullable
     @Override
@@ -40,17 +46,26 @@ public class ScheduleFragment extends Fragment{
     {
         super.onCreate(savedInstanceState);
 
-        List<ScheduledTime> cachedSchedule = (List<ScheduledTime>) CoreController.getInstance().getCache().get(SCHEDULE_CACHE_KEY);
+        Map<String,String> params = new HashMap<>();
+        params.put("id", EnvironmentHelper.getInstance().getProductId());
+        String result = Utils.sendGet("product", params);
+        try
+        {
+            JSONObject objResult = new JSONObject(result);
 
-        if (cachedSchedule == null) {
-            ArrayList<ScheduledTime> scheduleList = new ArrayList<>();
-            CoreController.getInstance().updateCache(SCHEDULE_CACHE_KEY, scheduleList);
         }
+        catch (Throwable e)
+        {
+
+        }
+
+        if (scheduleList == null)
+            scheduleList = new ArrayList<>();
         else
         {
-            for (int i = 0; i < cachedSchedule.size(); i++)
+            for (int i = 0; i < scheduleList.size(); i++)
             {
-                timedArray[i] = cachedSchedule.get(i);
+                timedArray[i] = scheduleList.get(i);
             }
         }
     }
@@ -107,6 +122,7 @@ public class ScheduleFragment extends Fragment{
                                 sdTime.setQty(qty);
                                 sdTime.setTimeInSec((int) hour * 60 * 60 + min * 60);
                                 timedArray[index] = sdTime;
+                                sendNewScheduledTime(sdTime);
                             }
                         } catch (Throwable e) {
 
@@ -121,6 +137,8 @@ public class ScheduleFragment extends Fragment{
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ScheduledTime sdTime = timedArray[index];
+                        deleteScheduledTime(sdTime);
                         timedArray[index] = null;
                         updateView(parentView);
                     }
@@ -169,7 +187,24 @@ public class ScheduleFragment extends Fragment{
                 break;
             }
         }
+    }
 
-        CoreController.getInstance().updateCache(SCHEDULE_CACHE_KEY, scheduleList);
+    private void sendNewScheduledTime(ScheduledTime timed)
+    {
+        Map<String,String> params = new HashMap<>();
+        params.put("time", timed.getTimeInSec().toString());
+        params.put("quantity", timed.getQty().toString());
+        params.put("productId", EnvironmentHelper.getInstance().getProductId());
+
+        Utils.sendGet("scheduleset", params);
+    }
+
+    private void deleteScheduledTime(ScheduledTime timed)
+    {
+        Map<String,String> params = new HashMap<>();
+        params.put("time", timed.getTimeInSec().toString());
+        params.put("productId", EnvironmentHelper.getInstance().getProductId());
+
+        Utils.sendGet("scheduleremove", params);
     }
 }
