@@ -67,15 +67,18 @@ public class Utils {
         if (method != null && !method.isEmpty())
             result += method + File.separator;
 
+        // degut a la nostra api aixo ha de ser una mica mes cutre
         if (getParams != null && !getParams.isEmpty())
         {
-            String paramStr = "?";
+            //String paramStr = "?";
+            String paramStr = "";
             for (Map.Entry<String,String> entry : getParams.entrySet())
             {
-                paramStr += entry.getKey() + "=" + entry.getValue() + "&";
+                //paramStr += entry.getKey() + "=" + entry.getValue() + "&";
+                paramStr += entry.getValue() + File.separator;
             }
 
-            paramStr = paramStr.substring(0, paramStr.length()-1);
+            //paramStr = paramStr.substring(0, paramStr.length()-1);
             result += paramStr;
         }
 

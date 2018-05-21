@@ -17,10 +17,12 @@ import com.spurna.core.util.EnvironmentHelper;
 import com.spurna.core.util.SetTime;
 import com.spurna.core.util.Utils;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,27 +48,10 @@ public class ScheduleFragment extends Fragment{
     {
         super.onCreate(savedInstanceState);
 
-        Map<String,String> params = new HashMap<>();
-        params.put("id", EnvironmentHelper.getInstance().getProductId());
-        String result = Utils.sendGet("product", params);
-        try
+        scheduleList = getScheduledTimeList();
+        for (int i = 0; i < scheduleList.size(); i++)
         {
-            JSONObject objResult = new JSONObject(result);
-
-        }
-        catch (Throwable e)
-        {
-
-        }
-
-        if (scheduleList == null)
-            scheduleList = new ArrayList<>();
-        else
-        {
-            for (int i = 0; i < scheduleList.size(); i++)
-            {
-                timedArray[i] = scheduleList.get(i);
-            }
+            timedArray[i] = scheduleList.get(i);
         }
     }
 
@@ -191,20 +176,57 @@ public class ScheduleFragment extends Fragment{
 
     private void sendNewScheduledTime(ScheduledTime timed)
     {
-        Map<String,String> params = new HashMap<>();
+        Map<String,String> params = new LinkedHashMap<>();
+        params.put("productId", EnvironmentHelper.getInstance().getProductId());
         params.put("time", timed.getTimeInSec().toString());
         params.put("quantity", timed.getQty().toString());
-        params.put("productId", EnvironmentHelper.getInstance().getProductId());
 
         Utils.sendGet("scheduleset", params);
     }
 
     private void deleteScheduledTime(ScheduledTime timed)
     {
-        Map<String,String> params = new HashMap<>();
-        params.put("time", timed.getTimeInSec().toString());
+        Map<String,String> params = new LinkedHashMap<>();
         params.put("productId", EnvironmentHelper.getInstance().getProductId());
+        params.put("time", timed.getTimeInSec().toString());
 
         Utils.sendGet("scheduleremove", params);
+    }
+
+    public List<ScheduledTime> getScheduledTimeList()
+    {
+        List<ScheduledTime> result = new ArrayList<>();
+
+        Map<String,String> params = new HashMap<>();
+        params.put("productId", EnvironmentHelper.getInstance().getProductId());
+
+        try
+        {
+            String resultStr = Utils.sendGet("product", params);
+            JSONArray array = new JSONArray(resultStr);
+            if (array.length() > 0)
+            {
+                for (int index = 0; index < array.length(); index++)
+                {
+                    ScheduledTime schTime = CoreController.getBO(ScheduledTimeBO.class).getNew();
+                    JSONObject subObject = array.getJSONObject(index);
+
+                    if (subObject.has("time") && subObject.has("quantity"))
+                    {
+                        schTime.setTimeInSec(subObject.getInt("time"));
+                        schTime.setQty(subObject.getInt("quantity"));
+
+                        result.add(schTime);
+                    }
+                }
+            }
+
+        }
+        catch (Throwable e)
+        {
+
+        }
+
+        return result;
     }
 }
