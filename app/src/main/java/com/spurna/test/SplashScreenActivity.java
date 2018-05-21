@@ -78,18 +78,8 @@ public class SplashScreenActivity extends Activity {
 
         }
 
-        if (productId == null)
-        {
-            productId = UUID.randomUUID().toString();
-            JSONObject object = new JSONObject();
-            try {
-                object.put("productId", productId);
-                Utils.doCreateConfig(getApplicationContext(), object.toString());
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-        EnvironmentHelper.getInstance().setProductId(productId);
+        if (productId != null)
+            EnvironmentHelper.getInstance().setProductId(productId);
     }
 
 

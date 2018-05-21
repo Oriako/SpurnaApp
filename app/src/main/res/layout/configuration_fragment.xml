@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/textView"
+        android:id="@+id/configTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -21,7 +21,7 @@
         android:hint="Device Id"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonLinkProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg_stroke"
