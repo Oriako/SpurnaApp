@@ -8,34 +8,26 @@
     android:paddingTop="15dp"
     android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:gravity="fill"
-            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="fill"
+        android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/addButton0"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:background="@mipmap/accept"
-                />
+        <EditText
+            android:id="@+id/timeText0"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGreyInput"
+            android:ems="10"
+            android:hint="Time"
+            android:inputType="time"
+            android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/timeText0"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:hint="Time"
-                android:ems="10"
-                android:background="@color/colorGreyInput"
-                android:textAlignment="center"
-                android:inputType="time" />
-
-            <EditText
+        <!--<EditText
                 android:id="@+id/qtyText0"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
@@ -44,108 +36,121 @@
                 android:background="@color/colorGreyInput"
                 android:layout_marginLeft="8dp"
                 android:textAlignment="center"
-                android:inputType="" />
-
-            <Button
-                android:id="@+id/deleteButton0"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@mipmap/delete"
-                />
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="fill"
-        android:orientation="horizontal">
+                android:inputType="" />-->
+        <Spinner
+            android:id="@+id/qty0"
+            android:layout_width="94dp"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
 
         <Button
-            android:id="@+id/addButton1"
+            android:id="@+id/addButton0"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/accept"
-            />
-
-        <EditText
-            android:id="@+id/timeText1"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:hint="Time"
-            android:ems="10"
-            android:background="@color/colorGreyInput"
-            android:textAlignment="center"
-            android:inputType="time" />
-
-        <EditText
-            android:id="@+id/qtyText1"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:hint="gr."
-            android:ems="10"
-            android:background="@color/colorGreyInput"
-            android:layout_marginLeft="8dp"
-            android:textAlignment="center"
-            android:inputType="" />
+            android:background="@mipmap/accept" />
 
         <Button
-            android:id="@+id/deleteButton1"
+            android:id="@+id/deleteButton0"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/delete"
-            />
+            android:background="@mipmap/delete" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
         android:gravity="fill"
         android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/timeText1"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGreyInput"
+            android:ems="10"
+            android:hint="Time"
+            android:inputType="time"
+            android:textAlignment="center" />
+
+        <!--<EditText
+                android:id="@+id/qtyText0"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:hint="gr."
+                android:ems="10"
+                android:background="@color/colorGreyInput"
+                android:layout_marginLeft="8dp"
+                android:textAlignment="center"
+                android:inputType="" />-->
+        <Spinner
+            android:id="@+id/qty1"
+            android:layout_width="94dp"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
         <Button
-            android:id="@+id/addButton2"
+            android:id="@+id/addButton1"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/accept"
-            />
+            android:background="@mipmap/accept" />
+
+        <Button
+            android:id="@+id/deleteButton1"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/delete" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="fill"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/timeText2"
             android:layout_width="120dp"
             android:layout_height="match_parent"
+            android:background="@color/colorGreyInput"
+            android:ems="10"
             android:hint="Time"
-            android:ems="10"
-            android:background="@color/colorGreyInput"
-            android:textAlignment="center"
-            android:inputType="time" />
+            android:inputType="time"
+            android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/qtyText2"
-            android:layout_width="80dp"
+        <!--<EditText
+                android:id="@+id/qtyText0"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:hint="gr."
+                android:ems="10"
+                android:background="@color/colorGreyInput"
+                android:layout_marginLeft="8dp"
+                android:textAlignment="center"
+                android:inputType="" />-->
+        <Spinner
+            android:id="@+id/qty2"
+            android:layout_width="94dp"
             android:layout_height="match_parent"
-            android:hint="gr."
-            android:ems="10"
-            android:background="@color/colorGreyInput"
-            android:layout_marginLeft="8dp"
-            android:textAlignment="center"
-            android:inputType="" />
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/addButton2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/accept" />
 
         <Button
             android:id="@+id/deleteButton2"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/delete"
-            />
+            android:background="@mipmap/delete" />
     </LinearLayout>
 </LinearLayout>
