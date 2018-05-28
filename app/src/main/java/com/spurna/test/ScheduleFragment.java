@@ -4,12 +4,15 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.spurna.core.CoreController;
@@ -32,14 +35,16 @@ import java.util.Map;
  * Created by Oriako on 05/03/2018.
  */
 
-public class ScheduleFragment extends Fragment{
+public class ScheduleFragment extends Fragment {
 
-    public static final Integer MAX_BUTTONS = 5;
+    public static final Integer MAX_BUTTONS = 3;
 
     private final String timeField = "timeText";
     private final String qtyField = "qtyText";
+    private final String qtySpinner = "qty";
     private final String addButtonField = "addButton";
     private final String deleteButtonField = "deleteButton";
+    private final String scheduleLayout = "scheduleLayout";
 
     private ScheduledTime [] timedArray = new ScheduledTime[MAX_BUTTONS];
     private List<ScheduledTime> scheduleList;
@@ -50,17 +55,6 @@ public class ScheduleFragment extends Fragment{
     {
         super.onCreate(savedInstanceState);
 
-        //ToDo: Dani, et deixo per aquí el que he trobat a SO: https://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-lis
-        /*//get the spinner from the xml.
-        Spinner dropdown = findViewById(R.id.spinner1);
-        //create a list of items for the spinner.
-        String[] items = new String[]{"1", "2", "three"};
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
-        */
         scheduleList = getScheduledTimeList();
         for (int i = 0; i < scheduleList.size(); i++)
         {
@@ -79,6 +73,35 @@ public class ScheduleFragment extends Fragment{
     {
         final View parentView = this.getView();
 
+        String[] items = new String[]{"LOW", "MID", "HIGH"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
+
+        for (int i = 0; i < MAX_BUTTONS; i++)
+        {
+            int qtyId = getResources().getIdentifier(qtySpinner + String.valueOf(i), "id", "com.spurna.test");
+            final int qtyEditTextId = getResources().getIdentifier(qtyField + String.valueOf(i), "id", "com.spurna.test");
+            Spinner qtySpinnerItem = (Spinner) view.findViewById(qtyId);
+
+            if (qtySpinnerItem != null) {
+                qtySpinnerItem.setAdapter(adapter);
+                qtySpinnerItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String item = parent.getItemAtPosition(position).toString();
+                        EditText qtyEditText = (EditText) parentView.findViewById(qtyEditTextId);
+                        if (qtyEditText != null)
+                            qtyEditText.setText(item);
+                        //parent.setSelection(position);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+            }
+        }
+
         for (int i = 0; i < MAX_BUTTONS; i++)
         {
             try
@@ -89,7 +112,6 @@ public class ScheduleFragment extends Fragment{
                 EditText timeText = (EditText) view.findViewById(timeTextId);
                 SetTime fromTime = new SetTime(timeText, timeText.getContext());
 
-
                 int addButtonId = getResources().getIdentifier(addButtonField + String.valueOf(i), "id", "com.spurna.test");
                 Button addButton = (Button) view.findViewById(addButtonId);
 
@@ -97,20 +119,19 @@ public class ScheduleFragment extends Fragment{
                     @Override
                     public void onClick(View view) {
                         int timeTextId = getResources().getIdentifier(timeField + String.valueOf(index), "id", "com.spurna.test");
-                        int qtyTextId = getResources().getIdentifier(qtyField + String.valueOf(index), "id", "com.spurna.test");
+                        int qtyId = getResources().getIdentifier(qtySpinner + String.valueOf(index), "id", "com.spurna.test");
 
                         EditText timeText = (EditText) parentView.findViewById(timeTextId);
-                        EditText qtyText = (EditText) parentView.findViewById(qtyTextId);
+                        Spinner qtySpinnerItem = (Spinner) parentView.findViewById(qtyId);
 
                         Editable timeStr = timeText.getText();
-                        Editable qtyStr = qtyText.getText();
 
                         try {
                             String[] time = timeStr.toString().split(":");
                             int hour = Integer.parseInt(time[0].trim());
                             int min = Integer.parseInt(time[1].trim());
 
-                            Integer qty = Integer.parseInt(qtyStr.toString());
+                            Integer qty = qtySpinnerItem.getSelectedItemPosition();
 
                             if (time != null && qty != null) {
                                 ScheduledTime sdTime = timedArray[index];
@@ -155,18 +176,21 @@ public class ScheduleFragment extends Fragment{
     {
         ArrayList<ScheduledTime> scheduleList = new ArrayList<>();
 
+        boolean firstNotNull = true;
         for (int i = 0; i < MAX_BUTTONS; i++)
         {
             int timeTextId = getResources().getIdentifier(timeField + String.valueOf(i), "id", "com.spurna.test");
             int qtyTextId = getResources().getIdentifier(qtyField + String.valueOf(i), "id", "com.spurna.test");
-
+            int layoutId = getResources().getIdentifier(scheduleLayout + String.valueOf(i), "id", "com.spurna.test");
             try
             {
                 EditText timeText = view.findViewById(timeTextId);
                 EditText qtyText = view.findViewById(qtyTextId);
+                LinearLayout scheduleLayout = view.findViewById(layoutId);
 
                 ScheduledTime time = timedArray[i];
-                if (time != null) {
+                if (time != null)
+                {
                     int totalSecs = time.getTimeInSec();
                     int hours = totalSecs / 3600;
                     int minutes = (totalSecs % 3600) / 60;
@@ -175,14 +199,26 @@ public class ScheduleFragment extends Fragment{
                     qtyText.setText(time.getQty().toString());
 
                     scheduleList.add(time);
-                } else {
+                }
+                else
+                {
+                    if (firstNotNull)
+                    {
+                        scheduleLayout.setVisibility(View.VISIBLE);
+                        firstNotNull = false;
+                    }
+                    else
+                    {
+                        scheduleLayout.setVisibility(View.INVISIBLE);
+                    }
+
                     timeText.setText(null);
                     qtyText.setText(null);
                 }
             }
             catch (Throwable e)
             {
-                break;
+                e.printStackTrace();
             }
         }
     }
@@ -242,4 +278,5 @@ public class ScheduleFragment extends Fragment{
 
         return result;
     }
+
 }
