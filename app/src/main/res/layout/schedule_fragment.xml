@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/timeText0"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@color/colorGreyInput"
             android:ems="10"
@@ -40,7 +40,7 @@
                 android:inputType="" />
         <Spinner
             android:id="@+id/qty0"
-            android:layout_width="94dp"
+            android:layout_width="44dp"
             android:layout_height="match_parent"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
@@ -57,7 +57,7 @@
             android:layout_height="match_parent"
             android:background="@mipmap/delete" />
     </LinearLayout>
-
+<!--
     <LinearLayout
         android:id="@+id/scheduleLayout1"
         android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:inputType="time"
             android:textAlignment="center" />
 
-        <!--<EditText
+        &lt;!&ndash;<EditText
                 android:id="@+id/qtyText0"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
@@ -88,7 +88,7 @@
                 android:background="@color/colorGreyInput"
                 android:layout_marginLeft="8dp"
                 android:textAlignment="center"
-                android:inputType="" />-->
+                android:inputType="" />&ndash;&gt;
         <Spinner
             android:id="@+id/qty1"
             android:layout_width="94dp"
@@ -130,7 +130,7 @@
             android:inputType="time"
             android:textAlignment="center" />
 
-        <!--<EditText
+        &lt;!&ndash;<EditText
                 android:id="@+id/qtyText0"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
@@ -139,7 +139,7 @@
                 android:background="@color/colorGreyInput"
                 android:layout_marginLeft="8dp"
                 android:textAlignment="center"
-                android:inputType="" />-->
+                android:inputType="" />&ndash;&gt;
         <Spinner
             android:id="@+id/qty2"
             android:layout_width="94dp"
@@ -158,5 +158,5 @@
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@mipmap/delete" />
-    </LinearLayout>
+    </LinearLayout>-->
 </LinearLayout>
