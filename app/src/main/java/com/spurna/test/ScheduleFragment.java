@@ -37,7 +37,7 @@ import java.util.Map;
 
 public class ScheduleFragment extends Fragment {
 
-    public static final Integer MAX_BUTTONS = 3;
+    public static final Integer MAX_BUTTONS = 5;
 
     private final String timeField = "timeText";
     private final String qtyField = "qtyText";
@@ -45,6 +45,8 @@ public class ScheduleFragment extends Fragment {
     private final String addButtonField = "addButton";
     private final String deleteButtonField = "deleteButton";
     private final String scheduleLayout = "scheduleLayout";
+
+    private final String[] items = new String[]{"LOW", "MID", "HIGH"};
 
     private ScheduledTime [] timedArray = new ScheduledTime[MAX_BUTTONS];
     private List<ScheduledTime> scheduleList;
@@ -73,7 +75,6 @@ public class ScheduleFragment extends Fragment {
     {
         final View parentView = this.getView();
 
-        String[] items = new String[]{"LOW", "MID", "HIGH"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, items);
 
         for (int i = 0; i < MAX_BUTTONS; i++)
@@ -196,7 +197,7 @@ public class ScheduleFragment extends Fragment {
                     int minutes = (totalSecs % 3600) / 60;
 
                     timeText.setText(String.format("%02d:%02d", hours, minutes));
-                    qtyText.setText(time.getQty().toString());
+                    qtyText.setText(items[time.getQty()]);
 
                     scheduleList.add(time);
                 }
